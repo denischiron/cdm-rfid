@@ -7,8 +7,8 @@ const dgram = require('node:dgram');
 
 /**************************************************/
 // TCP Params :
-const hosts = [ "192.168.88.253" ];
-const tcpPort = 1300;
+const hosts = [ "192.168.88.248", "192.168.88.251", "192.168.88.254", "192.168.88.249", "192.168.88.250" ];
+const tcpPorts = [ 1300, 1301, 1302, 1303, 1304 ];
 
 // UDP Params :
 const udpHost = "localhost";
@@ -164,8 +164,9 @@ class HostStateManager {
 
 // Initialisation :
 const hostStateManagers = [];
-let i = 0;
+let i = 0, tcpPort;
 for (const host of hosts) {
+    tcpPort = tcpPorts[i];
     hostStateManagers[host] = new HostStateManager(i++, host, tcpPort);
 }
 
