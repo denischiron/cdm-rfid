@@ -49,7 +49,7 @@ const getTagIdFromTagData = function(tag) {
     const STX  = tag.substr(0, 2);
     const SEQ  = tag.substr(2, 2);
     const DADD = tag.substr(4, 2);
-    const DATA_LENGTH = parseInt(tag.substr(6, 2));
+    const DATA_LENGTH = parseInt(tag.substr(6, 2), 16);
     const STATUS = tag.substr(8, 2);
 
     const dataLength = 2 * (DATA_LENGTH - 1);

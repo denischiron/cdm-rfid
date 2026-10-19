@@ -26,7 +26,7 @@ const getTagIdFromTagData = function(tag) {
     const STX  = tag.substr(0, 2);
     const SEQ  = tag.substr(2, 2);
     const DADD = tag.substr(4, 2);
-    const DATA_LENGTH = parseInt(tag.substr(6, 2));
+    const DATA_LENGTH = parseInt(tag.substr(6, 2), 16);
     const STATUS = tag.substr(8, 2);
 
     const dataLength = 2 * (DATA_LENGTH - 1);
@@ -47,7 +47,8 @@ const getTagIdFromTagData = function(tag) {
 const prepareCommand = function(commandID, dataAsArray = [], sequenceID = "00") {
 
     const dataLength = dataAsArray.length + 1;
-    const dataLengthAsString = (dataLength < 10 ? "0" : "") + dataLength
+    const dataLengthAsString16 = dataLength.toString(16);
+    const dataLengthAsString = dataLengthAsString16.length === 1 ? "0" + dataLengthAsString16 : dataLengthAsString16;
 
     const trameFirstParts = [
         "02",       // STX (start)
